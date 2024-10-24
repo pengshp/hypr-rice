@@ -1,0 +1,263 @@
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+vi_mode_style = { shape = "Beam", blinking = "On" }
+blink_interval = 750
+blink_timeout = 5
+unfocused_hollow = true
+
+
+[env]
+TERM = "xterm-256color"
+TMUX_TMPDIR = "~/.cache/tmux"
+
+[font]
+builtin_box_drawing = true
+size = 18.0
+normal = { family = "SFMono Nerd Font Mono", style = "Regular" }
+bold = { family = "SFMono Nerd Font Mono", style = "Bold" }
+italic = { family = "SFMono Nerd Font Mono", style = "Italic" }
+bold_italic = { family = "SFMono Nerd Font Mono", style = "Bold Italic" }
+
+[[hints.enabled]]
+command = "xdg-open"
+hyperlinks = true
+persist = false
+post_processing = true
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
+
+[hints.enabled.binding]
+key = "O"
+mods = "Control|Shift"
+
+[hints.enabled.mouse]
+enabled = true
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "Paste"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "Copy"
+
+# [[keyboard.bindings]]
+# chars = "gcc"
+# key = "Slash"
+# mods = "Control"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "PageUp"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "PageDown"
+mode = "~Alt"
+mods = "Shift"
+
+# Open tmux popup window.
+[[keyboard.bindings]]
+chars = "\u0002T"
+key = "J"
+mods = "Alt"
+
+# Create new tmux window.
+[[keyboard.bindings]]
+chars = "\u0002c"
+key = "T"
+mods = "Alt"
+
+# Rename tmux window.
+[[keyboard.bindings]]
+chars = "\u0002,"
+key = "Comma"
+mods = "Alt"
+
+# Select tmux session
+[[keyboard.bindings]]
+chars = "\u0002K"
+key = "K"
+mods = "Alt"
+
+# Select window [n]
+[[keyboard.bindings]]
+chars = "\u00021"
+key = "Key1"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00022"
+key = "Key2"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00023"
+key = "Key3"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00024"
+key = "Key4"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00025"
+key = "Key5"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00026"
+key = "Key6"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00027"
+key = "Key7"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00028"
+key = "Key8"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u00029"
+key = "Key9"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0002!"
+key = "T"
+mods = "Alt|Shift"
+
+# kill the current tmux pane.
+[[keyboard.bindings]]
+chars = "\u0002x"
+key = "P"
+mods = "Alt"
+
+# Toggle the zoom state of the current tmux pane.
+[[keyboard.bindings]]
+chars = "\u0002z"
+key = "Z"
+mods = "Alt"
+
+# switch to the last tmux session
+[[keyboard.bindings]]
+chars = "\u0002L"
+key = "L"
+mods = "Alt"
+
+# Detach the current tmux client.
+[[keyboard.bindings]]
+chars = "\u0002d"
+key = "Q"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "SearchConfirm"
+key = "Return"
+mode = "Search"
+
+[[keyboard.bindings]]
+action = "SearchCancel"
+key = "Escape"
+mode = "Search"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mode = "~Vi"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "PasteSelection"
+key = "Insert"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F11"
+mods = "None"
+
+[mouse]
+hide_when_typing = false
+bindings = [
+  { mouse = "Back", action = "Paste" },
+  { mouse = "Right", mods = "Control", action = "ExpandSelection" },
+]
+
+#
+# [[mouse.bindings]]
+# action = "PasteSelection"
+# mode = "~Vi"
+# mouse = "Middle"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[terminal]
+osc52 = "OnlyCopy"
+[terminal.shell]
+#args = ["--login"]
+program = "/usr/bin/zsh"
+# args = ["-c","tmux new-session -A -D -s main"]
+
+[window]
+decorations = "none"
+decorations_theme_variant = "None"
+dynamic_title = true
+opacity = 0.7
+blur = false
+startup_mode = "Windowed"
+title = "Alacritty"
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
+
+# [window.dimensions]
+# columns = 0
+# lines = 0
+
+[window.padding]
+x = 4
+y = 4
+
+[general]
+live_config_reload = true
+ipc_socket = true
+# https://alacritty.org/config-alacritty.html
+import = ["themes/catppuccin-macchiato.toml"]

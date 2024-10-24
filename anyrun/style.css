@@ -1,0 +1,85 @@
+* {
+  all: unset;
+  font-family: "Sans-serif";
+  font-size: 20px;
+}
+
+#window,
+#match,
+#entry,
+#plugin,
+#main {
+  background: transparent;
+}
+
+#match.activatable {
+  border-radius: 10px;
+  padding: 0.3rem 0.9rem;
+  margin-top: 0.01rem;
+}
+
+#match.activatable:first-child {
+  margin-top: 9px;
+}
+
+#match.activatable:last-child {
+  margin-bottom: 1px;
+}
+
+#plugin:hover #match.activatable {
+  border-radius: 10px;
+  padding: 0.3rem;
+  margin-top: 0.01rem;
+  margin-bottom: 0;
+}
+
+#match:selected {
+  color: rgba(36, 39, 58, 0.8);
+  background: rgba(198, 160, 246, 0.8);
+  border-radius: 10px;
+}
+
+#entry {
+  border: 1px solid rgba(202, 211, 245, 0.6);
+  border-radius: 10px;
+  margin: 0.1rem;
+  padding: 0.6rem 1rem;
+  caret-color: white;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+list > #plugin {
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+  margin: 0.1rem;
+  padding-top: 4px;
+  padding-left: 3px;
+  font-weight: 400;
+}
+
+list > #plugin:first-child {
+  margin-top: 0.3rem;
+}
+
+list > #plugin:last-child {
+  margin-bottom: 0.3rem;
+}
+
+list > #plugin:hover {
+  padding: 0.7rem;
+}
+
+box#main {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-width: 1px;
+  border-style: solid;
+  margin-top: 15px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  padding: 0.7rem;
+}
+
+zlabel#plugin {
+  font-size: 18px;
+}

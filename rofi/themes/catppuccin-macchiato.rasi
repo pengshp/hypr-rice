@@ -1,0 +1,122 @@
+* {
+    bg-col:  rgba(36, 39, 58, 0.6);
+    bg-col-light: rgba(73, 77, 100,0.4);
+    border-col: rgba(183, 189, 248,0.6);
+    selected-col:rgba(183, 189, 248,0.6);
+    blue: #8aadf4;
+    fg-col: #cad3f5;
+    fg-col2: #ed8796;
+    grey: #6e738d;
+    peach: #f5a97f;
+    text-col: #cad3f5;
+
+    background-color: transparent;
+    font: "SFMono Nerd Font 18";
+}
+
+element-text, element-icon , mode-switcher {
+    text-color: inherit;
+}
+
+window {
+    location: center;
+    height: 40%;
+    width: 640;
+    border: 1px;
+    border-radius:  10px;
+    border-color: @border-col;
+    background-color: @bg-col;
+}
+
+mainbox {
+    background-color: @bg-col;
+}
+
+inputbar {
+    children: [prompt,entry];
+    background-color: @bg-col;
+    border: 0px 0px 2px 0px solid;
+    border-color: #b7bdf8;
+    border-radius: 10px 10px 0px 0px;
+    padding: 6px;
+}
+
+prompt {
+    background-color: @grey;
+    padding: 4px 16px 2px 6px;
+    text-color: @peach;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+}
+
+entry {
+    placeholder: "Search...";
+    padding: 5px;
+    margin: 0px 5px;
+    text-color: @grey;
+    background-color: @bg-col;
+}
+
+listview {
+    border: 0px;
+    padding: 6px 0px 0px;
+    margin: 2px 6px;
+    columns: 1;
+    lines: 10;
+    background-color: transparent;
+}
+
+element {
+    padding: 6px 6px;
+    background-color: @bg-col;
+    text-color: @fg-col  ;
+    border-radius:  8px;
+}
+
+element-icon {
+    size: 1em;
+    vertical-align: 0.5;
+}
+
+element selected {
+    background-color:  @selected-col;
+    text-color: rgba(30, 32, 48, 0.8);
+}
+
+mode-switcher {
+    spacing: 2;
+}
+
+button {
+    padding: 10px;
+    background-color: @bg-col-light;
+    text-color: @blue;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+}
+
+button selected {
+    background-color: rgba(36, 39, 58,0.8);
+    text-color: @blue;
+}
+
+message {
+    background-color: @bg-col-light;
+    margin: 2px;
+    padding: 2px;
+    border-radius: 10px;
+}
+
+textbox {
+    padding: 6px;
+    margin: 20px 0px 0px 20px;
+    text-color: @blue;
+    background-color: @bg-col-light;
+}
+
+// vim: ft=rasi

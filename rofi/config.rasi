@@ -1,0 +1,34 @@
+configuration {
+    modes: "drun,ssh,emoji:rofimoji,window,run";
+    font: "sans-serif 20";
+    location: 0;
+    sorting-method: "normal";
+    // icon-theme: "Dracula";
+    show-icons:true;
+    terminal: "alacritty";
+    matching: "regex";
+    disable-history: false;
+    hide-scrollbar: true;
+    sidebar-mode: true;
+    drun-match-fields: "name";
+    drun-display-format: "{icon} {name}";
+    window-format: "{w} {c} {t}";
+    display-run: "";
+    display-ssh: "󰒒";
+    display-drun: "";
+    display-window: "";
+    display-keys: "";
+    display-filebrowser: "󰈞";
+    display-calc: "";
+    display-emoji: "󰞅";
+
+    // keybings
+    // Change default kb-row-select Ctrl + Space
+    kb-row-select: "Control+y";
+    kb-mode-next: "Shift+Right,Control+Tab";
+}
+
+//@theme "azure"
+@theme "catppuccin-macchiato"
+//@theme "spotlight-dark.rasi"
+// vim: ft=rasi

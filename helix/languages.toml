@@ -1,0 +1,239 @@
+# --------------- Python
+[[language]]
+name = "python"
+scope = "source.python"
+comment-token = "#"
+indent = { tab-width = 4, unit = "    " }
+language-servers = ["ruff", { name = "pylsp", except-features = ["format"] }]
+auto-format = true
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+[language-server.delance]
+command = "delance-langserver"
+args = ["--stdio"]
+
+# ------------- golang
+[[language]]
+name = "go"
+scope = "source.go"
+injection-regex = "go"
+file-types = ["go"]
+roots = ["go.work", "go.mod"]
+auto-format = true
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+language-servers = ["gopls"]
+# TODO: gopls needs utf-8 offsets?
+indent = { tab-width = 4, unit = "\t" }
+[language-server.gopls]
+command = "gopls"
+args = ["-logfile=/tmp/gopls.log", "serve"]
+[language-server.gopls.config]
+"ui.diagnostic.staticcheck" = true
+
+# ------------- ansible
+[language-server.ansible-language-server]
+command = "ansible-language-server"
+args = ["--stdio"]
+
+# ------------- lua
+[[language]]
+name = "lua"
+injection-regex = "lua"
+scope = "source.lua"
+file-types = ["lua"]
+shebangs = ["lua", "luajit"]
+roots = [".luarc.json", ".luacheckrc", ".stylua.toml"]
+comment-token = "--"
+block-comment-tokens = { start = "--[[", end = "--]]" }
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["lua-language-server"]
+[language-server.lua-language-server]
+command = "lua-language-server"
+args = ["--locale=zh-cn"]
+
+[language-server.lua-language-server.config.Lua.hint]
+enable = true
+arrayIndex = "Enable"
+setType = true
+paramName = "All"
+paramType = true
+await = true
+
+
+# -------------- toml
+[[language]]
+name = "toml"
+scope = "source.toml"
+injection-regex = "toml"
+file-types = ["toml", { glob = "Cargo.lock" }, { glob = "uv.lock" }]
+comment-token = "#"
+language-servers = ["taplo"]
+indent = { tab-width = 2, unit = "  " }
+
+[language-server.taplo]
+command = "taplo"
+args = ["lsp", "stdio"]
+
+# -------------- yaml
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+file-types = ["yml", "yaml"]
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["yaml-language-server"]
+injection-regex = "yml|yaml"
+
+[language-server.yaml-language-server]
+command = "yaml-language-server"
+args = ["--stdio"]
+
+# --------------- hcl
+[[language]]
+name = "hcl"
+scope = "source.hcl"
+injection-regex = "(hcl|tf|nomad)"
+language-id = "terraform"
+file-types = ["hcl", "tf", "nomad"]
+comment-token = "#"
+block-comment-tokens = { start = "/*", end = "*/" }
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["terraform-ls"]
+auto-format = true
+
+[language-server.terraform-ls]
+command = "terraform-ls"
+args = ["serve"]
+
+# --------------- kdl
+[[language]]
+name = "kdl"
+scope = "source.kdl"
+file-types = ["kdl"]
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+injection-regex = "kdl"
+
+# --------------- sql
+[[language]]
+name = "sql"
+scope = "source.sql"
+file-types = ["sql", "dsql"]
+comment-token = "--"
+block-comment-tokens = { start = "/*", end = "*/" }
+indent = { tab-width = 4, unit = "    " }
+injection-regex = "sql"
+
+# --------------- dockerfile
+[[language]]
+name = "dockerfile"
+scope = "source.dockerfile"
+injection-regex = "docker|dockerfile"
+roots = ["Dockerfile", "Containerfile"]
+file-types = [
+  "Dockerfile",
+  { glob = "Dockerfile" },
+  { glob = "Dockerfile.*" },
+  "dockerfile",
+  { glob = "dockerfile" },
+  { glob = "dockerfile.*" },
+  "Containerfile",
+  { glob = "Containerfile" },
+  { glob = "Containerfile.*" },
+  "containerfile",
+  { glob = "containerfile" },
+  { glob = "containerfile.*" },
+]
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["docker-langserver"]
+
+[language-server.docker-langserver]
+command = "docker-langserver"
+args = ["--stdio"]
+
+# --------------- docker compose
+[[language]]
+name = "docker-compose"
+scope = "source.yaml.docker-compose"
+roots = ["docker-compose.yaml", "docker-compose.yml"]
+language-servers = ["docker-compose-langserver", "yaml-language-server"]
+file-types = [{ glob = "docker-compose.yaml" }, { glob = "docker-compose.yml" }]
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+grammar = "yaml"
+
+[language-server.docker-compose-langserver]
+command = "docker-compose-langserver"
+args = ["--stdio"]
+
+# --------------- markdown
+[[language]]
+name = "markdown"
+scope = "source.md"
+injection-regex = "md|markdown"
+file-types = ["md", "markdown", { glob = "PULLREQ_EDITMSG" }]
+roots = [".marksman.toml"]
+language-servers = ["marksman"]
+indent = { tab-width = 2, unit = "  " }
+block-comment-tokens = { start = "<!--", end = "-->" }
+
+[language-server.marksman]
+command = "marksman"
+args = ["server"]
+
+# --------------- css
+[[language]]
+name = "css"
+scope = "source.css"
+injection-regex = "css"
+file-types = ["css", "scss"]
+block-comment-tokens = { start = "/*", end = "*/" }
+language-servers = ["vscode-css-language-server"]
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+
+[language-server.vscode-css-language-server]
+command = "vscode-css-language-server"
+args = ["--stdio"]
+config = { provideFormatter = true }
+css = { validate = { enable = true } }
+
+# --------------- bash
+[[language]]
+name = "bash"
+scope = "source.bash"
+injection-regex = "(shell|bash|zsh|sh)"
+shebangs = ["sh", "bash", "dash", "zsh"]
+file-types = ["sh", "bash", "zsh"]
+comment-token = "#"
+language-servers = ["bash-language-server"]
+indent = { tab-width = 2, unit = "  " }
+
+[language-server.bash-language-server]
+command = "bash-language-server"
+args = ["start"]
+
+# --------------- log
+[[language]]
+name = "log"
+scope = "source.log"
+file-types = ["log"]
+
+# --------------- hyprlang
+[[language]]
+name = "hyprlang"
+scope = "source.hyprlang"
+roots = ["hyprland.conf"]
+file-types = [
+  { glob = "hyprland.conf" },
+  { glob = "hyprpaper.conf" },
+  { glob = "hypridle.conf" },
+  { glob = "hyprlock.conf" },
+]
+comment-token = "#"
+grammar = "hyprlang"

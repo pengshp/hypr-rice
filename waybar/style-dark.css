@@ -1,0 +1,283 @@
+/* @import './mocha.css'; */
+@import "./macchiato.css";
+
+* {
+  font-family: "RobotoMono Nerd Font Propo";
+  font-weight: 500;
+  font-size: 18px;
+  /* background: @base; */
+  /* border: 1px solid @overlay; */
+  border: none;
+}
+
+/* waybar */
+window#waybar {
+  background: transparent;
+  /* color: @base; */
+  border-radius: 10px;
+  transition-property: background;
+  transition-duration: 0.5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+/* make window module transparent when no windows present */
+window#waybar.empty #window {
+  background-color: transparent;
+}
+
+tooltip {
+  background: rgba(54, 58, 79, 0.8);
+  border: 1px solid rgba(110, 115, 141, 0.6);
+  border-radius: 10px;
+  padding: 2px 10px;
+}
+
+tooltip label {
+  color: @subtext0;
+  background: transparent;
+}
+
+/*
+ * hyprland/workspace */
+#workspaces {
+  border-radius: 10px;
+  padding: 2px 10px;
+  border: 2px solid @mauve;
+}
+
+#workspaces button {
+  padding: 2px 5px;
+  /* background: @surface0; */
+  color: @overlay2;
+  border: none;
+  border-radius: 10px;
+}
+
+#workspaces button:hover {
+  color: @rosewater;
+  background: @overlay0;
+}
+
+#workspaces button.active {
+  color: @pink;
+  /* background: @surface1; */
+  /* box-shadow: inset 0 -1px #ffffff; */
+}
+
+#workspaces button.empty {
+  color: @overlay0;
+}
+
+/*#workspaces button.visible {*/
+/*    color: @blue;*/
+/*}*/
+
+#workspaces button.urgent {
+  color: @red;
+}
+
+/*
+ * hyprland/window */
+#window {
+  color: @teal;
+}
+
+#clock,
+/*#cpu,*/
+/*#memory,*/
+/*#disk,*/
+#hardware,
+#idle_inhibitor,
+#backlight,
+#network,
+#blueman,
+#wireplumber,
+#custom-hint,
+#custom-media,
+#custom-pkg,
+#custom-logo,
+#custom-weather,
+#custom-power,
+#tray,
+#mode,
+#privacy,
+#workspaces,
+#window,
+#mpd {
+  padding: 2px 10px;
+  background: rgba(36, 39, 58, 0.8);
+  /*background: @base;*/
+  /*opacity: 0.8;*/
+  /*background: radial-gradient(circle, rgba(24, 25, 38, 1) 0%, rgba(30, 32, 48, 1) 60%, rgba(36, 39, 58, 1) 100%);*/
+  border: 2px solid @mauve;
+  border-radius: 10px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+  margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+  margin-right: 0;
+}
+
+#clock {
+  color: @yellow;
+}
+
+@keyframes blink {
+  to {
+    color: #ffffff;
+    color: #000000;
+  }
+}
+
+label:focus {
+  background: @flamingo;
+}
+
+#cpu {
+  color: @yellow;
+}
+
+#memory {
+  color: @teal;
+}
+
+#disk {
+  color: @rosewater;
+}
+
+#custom-hint {
+  color: @sapphire;
+}
+
+#custom-pkg {
+  color: @green;
+  padding: 0px 10px;
+  margin: 0px 2px;
+}
+
+#custom-logo {
+  color: @blue;
+  margin-left: 4px;
+}
+
+#custom-weather {
+  color: @sky;
+  padding: 0px 10px;
+  margin-right: 2px;
+}
+
+#bluetoolth {
+  color: @blue;
+}
+
+/* upower */
+#upower {
+  color: @teal;
+  margin-left: 10px;
+}
+
+#upower.charging {
+  color: @green;
+}
+
+#upower.discharging {
+  color: @red;
+}
+
+#upower.unknown-status {
+  color: @yellow;
+}
+
+/* network */
+#network {
+  color: @lavender;
+}
+
+#network.disconnected {
+  color: @yellow;
+}
+
+/* wireplumber */
+#wireplumber {
+  color: @pink;
+}
+
+#wireplumber.muted {
+  color: @maroon;
+}
+
+/* tray */
+#tray {
+  /* color: @base; */
+  color: @teal;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  color: @red;
+}
+
+/* idle_inhibitor */
+#idle_inhibitor {
+  color: @mauve;
+}
+
+#idle_inhibitor.activated {
+  color: @pink;
+}
+
+#custom-power {
+  color: @red;
+  margin-right: 4px;
+}
+
+/* mpd */
+#mpd {
+  color: @sapphire;
+}
+
+#mpd.disconnected {
+  color: @red;
+}
+
+#mpd.stopped {
+  color: @pink;
+}
+
+#mpd.paused {
+  color: @flamingo;
+}
+
+/* privacy module */
+#privacy {
+  color: @red;
+}
+
+#privacy-item {
+  padding: 2px;
+  color: @green;
+}
+
+#privacy-item.screenshare {
+  color: @blue;
+}
+
+#privacy-item.audio-in {
+  color: @sky;
+}
+
+#privacy-item.audio-out {
+  color: @yellow;
+}

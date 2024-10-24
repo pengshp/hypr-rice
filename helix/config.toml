@@ -1,0 +1,71 @@
+#theme = "onedark"
+theme = "base16_transparent"
+#theme = "catppuccin_mocha"
+[editor]
+line-number = "relative"
+cursorline = true
+mouse = true
+middle-click-paste = true
+scroll-lines = 3
+auto-completion = true
+completion-trigger-len = 2
+auto-info = true
+auto-save = true
+true-color = true
+color-modes = true
+gutters = ["line-numbers", "diff"]
+bufferline = "multiple"
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+render = true
+character = "┊"
+
+[editor.statusline]
+left = ["mode", "diagnostics"]
+center = ["file-name"]
+separator = "│"
+right = [
+  "selections",
+  "spinner",
+  "file-type",
+  "file-encoding",
+  "position-percentage",
+  "position",
+]
+
+
+[editor.file-picker]
+hidden = true
+ignore = true
+parents = true
+git-ignore = true
+
+
+[editor.search]
+smart-case = true
+wrap-around = true
+
+[keys.normal]
+"del" = "delete_selection"
+# h-c = ":open ~/.config/helix/config.toml"
+G = "goto_file_end"
+X = "extend_line_above"
+D = "delete_char_backward"
+C-y = ":clipboard-yank"
+C-k = "hover"                                                                     # Documentation
+C-g = ":sh tmux popup -d \"#{pane_current_path}\" -xC -yC -w80% -h80% -E lazygit"
+
+
+[keys.insert]
+C-s = ":w"              # Save file
+C-y = ":clipboard-yank"
+C-k = "hover"           # Documentation

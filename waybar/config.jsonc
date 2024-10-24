@@ -1,0 +1,311 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    //"height": 30, // Waybar height (to be removed for auto height)
+    //"width": 2520, // Waybar width
+    "exclusive": "true",
+    "passthrough": "false",
+    "output": [
+        "HDMI-A-1"
+    ],
+    "mod": "dock",
+    "reload_style_on_change": true,
+    "spacing": 4, // Gaps between modules (4px)
+    "gtk-layer-shell": true,
+    // Choose the order of the modules
+    "modules-left": [
+        "custom/logo",
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "privacy",
+        "mpd",
+        "custom/pkg",
+        "clock",
+        "custom/hint"
+        //"custom/weather"
+    ],
+    "modules-right": [
+        //"backlight",
+        "wireplumber",
+        "group/hardware",
+        // "disk",
+        // "cpu",
+        // "memory",
+        "network",
+        "group/blueman",
+        "tray",
+        "idle_inhibitor",
+        "custom/power"
+    ],
+    "group/hardware": {
+        "orientation": "horizontal",
+        "click-to-reveal": true,
+        "modules": [
+            "memory",
+            "cpu",
+            "disk"
+        ]
+    },
+    "group/blueman": {
+        "orientation": "horizontal",
+        "click-to-reveal": true,
+        "modules": [
+            "bluetooth",
+            "upower"
+        ]
+    },
+    // Modules configuration
+    "custom/logo": {
+        "format": "󰣇",
+        "on-click": "nwg-drawer -lang zh_CN -term alacritty",
+        "tooltip": true,
+        "tooltip-format": "Left Click: nwg-drawer"
+    },
+    "custom/divider": {
+        "format": "|"
+    },
+    "hyprland/workspaces": {
+        "all-outputs": true,
+        "active-only": false,
+        "on-click": "activate",
+        //"disable-scroll": true,
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "format": "{icon}",
+        "format-icons": {
+            "1": "1:",
+            "2": "2:",
+            "3": "3:󰨞",
+            "4": "4:",
+            "5": "5:",
+            "6": "6:",
+            "7": "7:󰭻",
+            "8": "8:󰕼",
+            "9": "9:󰠃",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        },
+        "window-rewrite": {
+            "title<.*youtube.*>": "",
+            "class<firefox> title<.*github.*>": "",
+            "firefox": "",
+            "alacritty": "",
+            "code": "󰨞"
+        }
+    },
+    "hyprland/window": {
+        "format": " {title}",
+        "rewrite": {
+            "(.*) — Mozilla Firefox": " $1",
+            "(.*) - nvim": " NeoVim",
+            "(.*) - zsh": " [$1]"
+        },
+        "separate-outputs": false,
+        "max-length": 30
+    },
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 6,
+        "show-passive-items": true
+    },
+    "bluetooth": {
+        "controller": "arch",
+        "format": "󰂯 {status}",
+        "format-disabled": "󰂲",
+        "format-connected": "󰂯 {num_connections}",
+        "on-click-right": "blueman-manager",
+        "tooltip-format": "{controller_alias}-{controller_address}",
+        "tooltip-format-connected": "{controller_alias}-{controller_address}\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}-{device_address}"
+    },
+    "upower": {
+        "native-path": "/org/bluez/hci0/dev_F9_F4_8E_BB_65_A9",
+        "format": "󰥉 {percentage}",
+        "show-icon": false,
+        "icon-size": 16,
+        "hide-if-empty": false,
+        "tooltip": true,
+        "tooltip-spacing": 4
+    },
+    "custom/pkg": {
+        "format": " {}",
+        //"exec": "(yay -Quq)|wc -l",
+        "exec": "~/.config/waybar/modules/update-sys",
+        //"on-click": "alacritty -e yay --noconfirm && notify-send 'The system has been update!' ",
+        "on-click": "~/.config/waybar/modules/update-sys update",
+        "interval": 7200, //2h
+        "tooltip": true,
+        "tooltip-format": "Left Click: Update System\nArch Linux Only"
+    },
+    "custom/power": {
+        "format": "",
+        "on-click": "wlogout",
+        "tooltip": true,
+        "tooltip-format": "Left Click: Wlogout"
+    },
+    "custom/weather": {
+        "format": "{}",
+        "tooltip": true,
+        "interval": 3600,
+        "exec": "~/.config/waybar/modules/waybar-wttr.py",
+        "return-type": "json"
+    },
+    "custom/hint": {
+        "format": "",
+        "on-click": "$HOME/.config/waybar/modules/KeyHints.sh",
+        "on-click-right": "$HOME/.config/hypr/scripts/random-wall.sh",
+        "tooltip": true,
+        "tooltip-format": "Left Click: Quick Tips\nRight Click: Random Wallpaper"
+    },
+    "clock": {
+        "timezone": "Asia/Shanghai",
+        "locale": "zh_CN.UTF-8",
+        // "format": " {:%I:%M %p}",
+        "format": " {:L%b-%Od %a  %OH:%OM}", //24 hour format
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        // "format-alt": "{:%Y-%m-%d}",
+        "format-alt": " {:%Y-%m-%d  %H:%M}",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "on-click-right": "mode",
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "privacy": {
+        "icon-spacing": 4,
+        "icon-size": 16,
+        "transition-duration": 250,
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true,
+                "tooltip-icon-size": 20
+            },
+            {
+                "type": "audio-out",
+                "tooltip": true,
+                "tooltip-icon-size": 20
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true,
+                "tooltip-icon-size": 20
+            }
+        ]
+    },
+    "backlight": {
+        "device": "phy0-led",
+        "format": "{icon}",
+        "format-alt-click": "click-right",
+        "format-alt": "{icon} {percent}%",
+        "format-icons": [
+            "󰃞",
+            "󰃟",
+            "󰃠"
+        ],
+        "on-scroll-up": "~/.config/waybar/modules/brightness --inc",
+        "on-scroll-down": "~/.config/waybar/modules/brightness --dec"
+    },
+    "cpu": {
+        "format": "󰻠 {usage}% ",
+        "on-click": "alacritty -T btop -e btop",
+        "tooltip": true
+    },
+    "memory": {
+        "format": "󰍛 {used}G "
+    },
+    "disk": {
+        "interval": 720,
+        "unit": "GB",
+        "format": " {free}"
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "<span font='16' rise='-2500'></span> {signalStrength}%",
+        "format-ethernet": "󰈀 {ifname}",
+        "tooltip-format": "{ifname} via {ipaddr}",
+        "format-linked": "󰈀 {ifname} (No IP)",
+        "format-disconnected": "⚠Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "wireplumber": {
+        "format": "{icon} {volume}%",
+        "format-muted": " MUTE",
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-right": "pavucontrol -t 3",
+        "max-volume": 100,
+        "format-icons": [
+            "",
+            "",
+            "󰖀",
+            "󰕾",
+            ""
+        ],
+        "scroll-step": 5.0,
+        "tooltip": true,
+        "tooltip-format": "Left Click: Mute\nRight Click: Set Volume"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "mpd": {
+        // "server": "/run/user/1003/mpd/socket",
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{title}|({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "interval": 10,
+        "consume-icons": {
+            "on": " " // Icon shows only when "consume" is on
+        },
+        "random-icons": {
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": "󰑖 "
+        },
+        "single-icons": {
+            "on": "󰑘 "
+        },
+        "state-icons": {
+            "paused": "󰐎",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)",
+        "max-length": 30,
+        "on-click": "mpc toggle",
+        "on-click-right": "mpc next"
+    }
+}

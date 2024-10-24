@@ -1,0 +1,228 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+palette = "catppuccin_macchiato"
+# Inserts a blank line between shell prompts
+add_newline = false
+
+# Replace the "❯" symbol in the prompt with "➜"
+#[character]
+#success_symbol = "[$](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
+# new config
+# format = """$all"""
+
+format = """
+$directory\
+$golang\
+$python\
+$lua\
+$nodejs\
+$rust\
+$docker_context\
+$kubernetes\
+$helm\
+$git_branch\
+$git_status\
+\n$character
+"""
+# Change the default prompt characters
+[character]
+success_symbol = "[](mauve)"
+error_symbol = "[](red)"
+vicmd_symbol = "[](green)"
+
+[line_break]
+disabled = true
+
+# [character]
+# success_symbol = "[](#6791c9)"
+# error_symbol = "[](#df5b61)"
+# vicmd_symbol = "[](#78b892)"
+
+[hostname]
+ssh_only = true
+format = "[$hostname](bold blue) "
+disabled = false
+
+
+# Shows an icon that should be included by zshrc script based on the distribution or os
+[env_var.STARSHIP_DISTRO]
+format = '[$env_value](white)'
+variable = "STARSHIP_DISTRO"
+disabled = false
+
+[os]
+disabled = false # Disabled by default
+
+[os.symbols]
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = ""
+Gentoo = " "
+Linux = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = " "
+openSUSE = " "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = " "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = "󰖳 "
+
+[directory]
+style = "fg:green"
+format = "[$path ]($style bold)"
+truncation_length = 3
+truncation_symbol = "󰝰 "
+read_only = " "
+
+# Here is how you can shorten some long paths by text replacement
+# similar to mapped_locations in Oh My Posh:
+[directory.substitutions]
+"~" = "~"
+"Documents" = "Documents 󱧶 "
+"Applications" = "App 󰣆 "
+"Downloads" = "Downloads 󰉍 "
+"Pictures" = "Pictures 󰉏 "
+"Music" = "Music 󱍙 "
+"Videos" = "Videos 󰚝 "
+"Github" = "Github  "
+"work" = "work 󱃪 "
+
+[aws]
+symbol = " "
+
+[c]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[terraform]
+format = "via [ terraform $version]($style)  [$workspace]($style) "
+
+[docker_context]
+# symbol = " "
+format = "via [ $context](blue) "
+
+[kubernetes]
+format = "via [󱃾 $context ($namespace)](blue) "
+
+[helm]
+format = "via [ $version](lavender) "
+disabled = true
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[golang]
+symbol = " "
+format = '[$symbol($version) ](teal)'
+
+[haskell]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[lua]
+symbol = " "
+format = '[$symbol($version)](blue)'
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+format = '[ $symbol($version)](green)'
+
+[python]
+symbol = " "
+python_binary = "python"
+disabled = true
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = "󱘗 "
+format = '[$symbol($version)](maroon)'
+
+[git_branch]
+symbol = " "
+format = " [$symbol$branch]($style) "
+truncation_length = 4
+truncation_symbol = "…"
+style = "purple"
+
+[git_status]
+format = '[\($all_status$ahead_behind\)]($style) '
+style = "bold green"
+conflicted = "󱚟"
+up_to_date = " "
+untracked = " "
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+stashed = "$"
+modified = " "
+staged = '[++\($count\)](green)'
+renamed = "»"
+deleted = " "
+disabled = true
+
+[palettes.catppuccin_macchiato]
+rosewater = "#f4dbd6"
+flamingo = "#f0c6c6"
+pink = "#f5bde6"
+mauve = "#c6a0f6"
+red = "#ed8796"
+maroon = "#ee99a0"
+peach = "#f5a97f"
+yellow = "#eed49f"
+green = "#a6da95"
+teal = "#8bd5ca"
+sky = "#91d7e3"
+sapphire = "#7dc4e4"
+blue = "#8aadf4"
+lavender = "#b7bdf8"
+text = "#cad3f5"
+subtext1 = "#b8c0e0"
+subtext0 = "#a5adcb"
+overlay2 = "#939ab7"
+overlay1 = "#8087a2"
+overlay0 = "#6e738d"
+surface2 = "#5b6078"
+surface1 = "#494d64"
+surface0 = "#363a4f"
+base = "#24273a"
+mantle = "#1e2030"
+crust = "#181926"
