@@ -5,6 +5,7 @@ scope = "source.python"
 comment-token = "#"
 indent = { tab-width = 4, unit = "    " }
 language-servers = ["ruff", { name = "pylsp", except-features = ["format"] }]
+formatter = { command = "ruff", args = ["format", "-"] }
 auto-format = true
 
 [language-server.ruff]
@@ -28,10 +29,12 @@ block-comment-tokens = { start = "/*", end = "*/" }
 language-servers = ["gopls"]
 # TODO: gopls needs utf-8 offsets?
 indent = { tab-width = 4, unit = "\t" }
+
 [language-server.gopls]
 command = "gopls"
 args = ["-logfile=/tmp/gopls.log", "serve"]
 [language-server.gopls.config]
+gofumpt = true
 "ui.diagnostic.staticcheck" = true
 
 # ------------- ansible
@@ -51,16 +54,18 @@ comment-token = "--"
 block-comment-tokens = { start = "--[[", end = "--]]" }
 indent = { tab-width = 2, unit = "  " }
 language-servers = ["lua-language-server"]
+formatter = { command = "stylua", args = ["-"] }
+auto-format = true
+
 [language-server.lua-language-server]
 command = "lua-language-server"
 args = ["--locale=zh-cn"]
 
 [language-server.lua-language-server.config.Lua.hint]
-enable = true
-arrayIndex = "Enable"
+enable = false
 setType = true
 paramName = "All"
-paramType = true
+paramType = false
 await = true
 
 
@@ -73,6 +78,8 @@ file-types = ["toml", { glob = "Cargo.lock" }, { glob = "uv.lock" }]
 comment-token = "#"
 language-servers = ["taplo"]
 indent = { tab-width = 2, unit = "  " }
+formatter = { command = "taplo", args = ["format", "-"] }
+auto-format = true
 
 [language-server.taplo]
 command = "taplo"
@@ -87,6 +94,8 @@ comment-token = "#"
 indent = { tab-width = 2, unit = "  " }
 language-servers = ["yaml-language-server"]
 injection-regex = "yml|yaml"
+formatter = { command = 'prettier', args = ["--parser", "yaml"] }
+auto-format = true
 
 [language-server.yaml-language-server]
 command = "yaml-language-server"
@@ -163,6 +172,7 @@ scope = "source.yaml.docker-compose"
 roots = ["docker-compose.yaml", "docker-compose.yml"]
 language-servers = ["docker-compose-langserver", "yaml-language-server"]
 file-types = [{ glob = "docker-compose.yaml" }, { glob = "docker-compose.yml" }]
+formatter = { command = 'prettier', args = ["--parser", "dockercompose"] }
 comment-token = "#"
 indent = { tab-width = 2, unit = "  " }
 grammar = "yaml"
@@ -174,13 +184,22 @@ args = ["--stdio"]
 # --------------- markdown
 [[language]]
 name = "markdown"
-scope = "source.md"
+scope = "text.md"
 injection-regex = "md|markdown"
 file-types = ["md", "markdown", { glob = "PULLREQ_EDITMSG" }]
 roots = [".marksman.toml"]
 language-servers = ["marksman"]
 indent = { tab-width = 2, unit = "  " }
 block-comment-tokens = { start = "<!--", end = "-->" }
+formatter = { command = 'prettier', args = [
+  "--parser",
+  "markdown",
+  "--prose-wrap",
+  "never",
+] }
+soft-wrap.enable = true
+text-width = 80
+soft-wrap.wrap-at-text-width = true
 
 [language-server.marksman]
 command = "marksman"
@@ -195,13 +214,38 @@ file-types = ["css", "scss"]
 block-comment-tokens = { start = "/*", end = "*/" }
 language-servers = ["vscode-css-language-server"]
 auto-format = true
-indent = { tab-width = 2, unit = "  " }
+indent = { tab-width = 4, unit = "    " }
+formatter = { command = 'prettier', args = [
+  "--parser",
+  "css",
+  "--tab-width",
+  "4",
+] }
 
 [language-server.vscode-css-language-server]
 command = "vscode-css-language-server"
 args = ["--stdio"]
 config = { provideFormatter = true }
 css = { validate = { enable = true } }
+
+# --------------- json
+[[language]]
+name = "json"
+scope = "source.json"
+file-types = ["json", "jsonc"]
+language-servers = ["vscode-json-language-server"]
+auto-format = true
+formatter = { command = 'prettier', args = [
+  "--parser",
+  "json",
+  "--tab-width",
+  "4",
+] }
+
+[language-server.vscode-json-language-server]
+command = "vscode-json-language-server"
+args = ["--stdio"]
+config = { provideFormatter = true, json = { validate = { enable = true } } }
 
 # --------------- bash
 [[language]]
@@ -212,7 +256,9 @@ shebangs = ["sh", "bash", "dash", "zsh"]
 file-types = ["sh", "bash", "zsh"]
 comment-token = "#"
 language-servers = ["bash-language-server"]
-indent = { tab-width = 2, unit = "  " }
+indent = { tab-width = 4, unit = "    " }
+formatter = { command = "shfmt", args = ["-i", "4"] }
+auto-format = true
 
 [language-server.bash-language-server]
 command = "bash-language-server"

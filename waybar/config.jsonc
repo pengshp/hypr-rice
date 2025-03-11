@@ -3,8 +3,9 @@
     "position": "top", // Waybar position (top|bottom|left|right)
     //"height": 30, // Waybar height (to be removed for auto height)
     //"width": 2520, // Waybar width
-    "exclusive": "true",
-    "passthrough": "false",
+    "exclusive": true,
+    "passthrough": false,
+    "ipc": false,
     "output": [
         "HDMI-A-1"
     ],
@@ -34,7 +35,8 @@
         // "cpu",
         // "memory",
         "network",
-        "group/blueman",
+        "bluetooth",
+        // "group/blueman",
         "tray",
         "idle_inhibitor",
         "custom/power"
@@ -44,7 +46,9 @@
         "click-to-reveal": true,
         "modules": [
             "memory",
+            "custom/separator",
             "cpu",
+            "custom/separator",
             "disk"
         ]
     },
@@ -52,8 +56,9 @@
         "orientation": "horizontal",
         "click-to-reveal": true,
         "modules": [
-            "bluetooth",
-            "upower"
+            "bluetooth"
+            // "custom/separator"
+            // "upower"
         ]
     },
     // Modules configuration
@@ -63,8 +68,9 @@
         "tooltip": true,
         "tooltip-format": "Left Click: nwg-drawer"
     },
-    "custom/divider": {
-        "format": "|"
+    "custom/separator": {
+        "format": "|",
+        "tooltip": false
     },
     "hyprland/workspaces": {
         "all-outputs": true,
@@ -134,7 +140,7 @@
         "native-path": "/org/bluez/hci0/dev_F9_F4_8E_BB_65_A9",
         "format": "󰥉 {percentage}",
         "show-icon": false,
-        "icon-size": 16,
+        // "icon-size": 16,
         "hide-if-empty": false,
         "tooltip": true,
         "tooltip-spacing": 4
@@ -149,11 +155,25 @@
         "tooltip": true,
         "tooltip-format": "Left Click: Update System\nArch Linux Only"
     },
+    // "custom/power": {
+    //     "format": "",
+    //     "on-click": "wlogout",
+    //     "tooltip": false,
+    //     "tooltip-format": "Left Click: Wlogout"
+    // },
     "custom/power": {
-        "format": "",
-        "on-click": "wlogout",
-        "tooltip": true,
-        "tooltip-format": "Left Click: Wlogout"
+        "format": "⏻",
+        "tooltip": false,
+        "menu": "on-click",
+        "menu-file": "~/.config/waybar/power_menu.xml",
+        "menu-actions": {
+            "shutdown": "systemctl poweroff",
+            "reboot": "systemctl reboot",
+            "lock": "loginctl lock-session",
+            "logout": "loginctl terminate-user $USER",
+            "suspend": "systemctl suspend",
+            "hibernate": "systemctl hibernate"
+        }
     },
     "custom/weather": {
         "format": "{}",
@@ -164,31 +184,29 @@
     },
     "custom/hint": {
         "format": "",
-        "on-click": "$HOME/.config/waybar/modules/KeyHints.sh",
+        "on-click": "eww open --toggle cheatsheet",
+        // "on-click": "$HOME/.config/waybar/modules/KeyHints.sh",
         "on-click-right": "$HOME/.config/hypr/scripts/random-wall.sh",
         "tooltip": true,
         "tooltip-format": "Left Click: Quick Tips\nRight Click: Random Wallpaper"
     },
     "clock": {
         "timezone": "Asia/Shanghai",
-        "locale": "zh_CN.UTF-8",
-        // "format": " {:%I:%M %p}",
-        "format": " {:L%b-%Od %a  %OH:%OM}", //24 hour format
-        "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        // "format-alt": "{:%Y-%m-%d}",
-        "format-alt": " {:%Y-%m-%d  %H:%M}",
+        "locale": "en_US.UTF-8",
+        "format": " {:%m-%Od %a  %OH:%OM}", //24 hour format
+        "tooltip-format": "<span>{calendar}</span>",
+        "on-click": "eww open --toggle eww_cal",
+        // "format-alt": " {:%Y-%m-%d  %H:%M}",
         "calendar": {
             "mode": "month",
             "mode-mon-col": 3,
-            "weeks-pos": "right",
             "on-scroll": 1,
             "on-click-right": "mode",
             "format": {
-                "months": "<span color='#ffead3'><b>{}</b></span>",
-                "days": "<span color='#ecc6d9'><b>{}</b></span>",
-                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
-                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+                "months": "<span color='#f5a97f'><b>{}</b></span>",
+                "days": "<span color='#f0c6c6'><b>{}</b></span>",
+                "weekdays": "<span color='#eed49f'><b>{}</b></span>",
+                "today": "<span color='#c6a0f6'><b><u>{}</u></b></span>"
             }
         },
         "actions": {
@@ -235,12 +253,12 @@
         "on-scroll-down": "~/.config/waybar/modules/brightness --dec"
     },
     "cpu": {
-        "format": "󰻠 {usage}% ",
+        "format": "󰻠 {usage}%",
         "on-click": "alacritty -T btop -e btop",
         "tooltip": true
     },
     "memory": {
-        "format": "󰍛 {used}G "
+        "format": "󰍛 {used}G"
     },
     "disk": {
         "interval": 720,
@@ -258,7 +276,7 @@
     },
     "wireplumber": {
         "format": "{icon} {volume}%",
-        "format-muted": " MUTE",
+        "format-muted": "󰝟 MUTE",
         "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
         "on-click-right": "pavucontrol -t 3",
         "max-volume": 100,
@@ -282,6 +300,7 @@
     },
     "mpd": {
         // "server": "/run/user/1003/mpd/socket",
+        // "server": "~/.mpd/mpd.socket",
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{title}|({elapsedTime:%M:%S}/{totalTime:%M:%S})",
         "format-disconnected": "Disconnected ",
         "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",

@@ -5,14 +5,14 @@ local act = wezterm.action
 -- This table will hold the ration.
 local config = {}
 
-function get_appearance()
+local function get_appearance()
 	if wezterm.gui then
 		return wezterm.gui.get_appearance()
 	end
 	return "Dark"
 end
 
-function scheme_for_appearance(appearance)
+local function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
 		return "Catppuccin Macchiato"
 	else
@@ -26,7 +26,6 @@ end
 
 -- This is where you actually apply your choices
 config = {
-	-- For example, changing the color scheme:
 	color_scheme = scheme_for_appearance(get_appearance()),
 	-- color_scheme = "Catppuccin Macchiato",
 	font = wezterm.font_with_fallback({
@@ -39,17 +38,28 @@ config = {
 			weight = "Regular",
 			scale = 0.9,
 		},
-		{ family = "LXGW WenKai Mono", weight = "Medium" },
+		-- {
+		-- 	family = "FiraCode Nerd Font Mono",
+		-- 	-- weight = "Medium",
+		-- 	harfbuzz_features = { "ss03", "ss05", "cv02", "cv05" },
+		-- },
+		{
+			family = "Maple Mono SC NF",
+			weight = "Regular",
+			scale = 0.9,
+		},
+		-- { family = "LXGW WenKai Mono", weight = "Medium" },
 		-- { family = "HarmonyOS Sans SC", scale = 0.9 },
 		"monospace",
 	}),
-	font_size = 18.0,
+	font_size = 14.0,
 	line_height = 1.0,
 	use_cap_height_to_scale_fallback_fonts = true,
 	window_background_opacity = 0.75,
 	text_background_opacity = 1.0,
 	bold_brightens_ansi_colors = false,
 
+	window_decorations = "NONE",
 	window_padding = {
 		left = 0,
 		right = 0,
@@ -59,6 +69,7 @@ config = {
 
 	-- Tab bar
 	enable_tab_bar = true,
+	use_fancy_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
 	show_tab_index_in_tab_bar = true,
 	show_new_tab_button_in_tab_bar = false,
@@ -135,7 +146,7 @@ config = {
 
 	scrollback_lines = 5000,
 
-	-- curse
+	-- cursor
 	cursor_blink_ease_in = "Linear",
 	cursor_blink_ease_out = "Linear",
 	cursor_blink_rate = 1000,
@@ -174,8 +185,8 @@ config = {
 	-- Command palette
 	-- Ctrl + Shift + p
 	command_palette_rows = 16,
-	command_palette_font_size = 16.0,
-	command_palette_bg_color = "#363a4f",
+	command_palette_font_size = 12.0,
+	command_palette_bg_color = "#24273a",
 	command_palette_fg_color = "rgba(202, 211, 245, 0.8)",
 
 	-- Keybinds
@@ -196,7 +207,7 @@ config = {
 		},
 	},
 
-	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
+	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 },
 
 	keys = {
 		{ key = "=", mods = "CTRL", action = act.IncreaseFontSize },
@@ -228,41 +239,41 @@ config = {
 		},
 		{
 			key = "h",
-			mods = "CTRL",
+			mods = "CTRL|ALT",
 			action = act({ ActivatePaneDirection = "Left" }),
 		},
 		{
 			key = "l",
-			mods = "CTRL",
+			mods = "CTRL|ALT",
 			action = act({ ActivatePaneDirection = "Right" }),
 		},
 		{
 			key = "k",
-			mods = "CTRL",
+			mods = "CTRL|ALT",
 			action = act({ ActivatePaneDirection = "Up" }),
 		},
 		{
 			key = "j",
-			mods = "CTRL",
+			mods = "CTRL|ALT",
 			action = act({ ActivatePaneDirection = "Down" }),
 		},
 		{
-			key = "h",
+			key = "LeftArrow",
 			mods = "CTRL|ALT",
 			action = act({ AdjustPaneSize = { "Left", 1 } }),
 		},
 		{
-			key = "l",
+			key = "RightArrow",
 			mods = "CTRL|ALT",
 			action = act({ AdjustPaneSize = { "Right", 1 } }),
 		},
 		{
-			key = "k",
+			key = "UpArrow",
 			mods = "CTRL|ALT",
 			action = act({ AdjustPaneSize = { "Up", 1 } }),
 		},
 		{
-			key = "j",
+			key = "DownArrow",
 			mods = "CTRL|ALT",
 			action = act({ AdjustPaneSize = { "Down", 1 } }),
 		},
@@ -311,6 +322,7 @@ for i = 1, 8 do
 end
 
 -- Plugin
+-- wezterm.plugin.require("https://github.com/yriveiro/wezterm-tabs").apply_to_config(config)
 local bar = wezterm.plugin.require("https://github.com/adriankarlen/bar.wezterm")
 bar.apply_to_config(config, {
 	modules = {

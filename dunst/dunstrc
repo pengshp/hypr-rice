@@ -1,4 +1,5 @@
 # See dunst(5) for all configuration options
+# https://dunst-project.org/documentation/
 
 [global]
     ### Display ###
@@ -19,21 +20,23 @@
     # will be ignored.
     follow = mouse
 
+    enable_posix_regex = true
     ### Geometry ###
 
     # dynamic width from 0 to 300
-    # width = (0, 300)
+    width = (0, 400)
     # constant width of 300
-    width = 400
+    # width = 400
 
     # The maximum height of a single notification, excluding the frame.
-    height = 150
+    height = (0,240)
 
     # Position the notification in the top right corner
     origin = top-right
+    # origin = top-center
 
     # Offset from the origin
-    offset = 30x30
+    offset = 40x30
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -49,16 +52,16 @@
 
     # Set the progress bar height. This includes the frame, so make sure
     # it's at least twice as big as the frame width.
-    progress_bar_height = 10
+    progress_bar_height = 4
 
     # Set the frame width of the progress bar
     progress_bar_frame_width = 1
 
     # Set the minimum width for the progress bar
-    progress_bar_min_width = 100
+    progress_bar_min_width = 10
 
     # Set the maximum width for the progress bar
-    progress_bar_max_width = 400
+    progress_bar_max_width = 200
 
     # Corner radius for the progress bar. 0 disables rounded corners.
     progress_bar_corner_radius = 0
@@ -82,26 +85,26 @@
     separator_height = 2
 
     # Padding between text and separator.
-    padding = 6
+    padding = 2
 
     # Horizontal padding.
-    horizontal_padding = 4
+    # horizontal_padding = 4
 
     # Padding between text and icon.
     text_icon_padding = 4
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 2
+    frame_width = 0
 
     # Defines color of the frame around the notification window.
-    frame_color = "#c6a0f6"
+    frame_color = "#f5bde6"
 
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border
     # of size frame_width will be drawn around each notification instead.
     # Click events on gaps do not currently propagate to applications below.
-    gap_size = 4
+    gap_size = 2
 
     # Define a color for the separator.
     # possible values are:
@@ -109,7 +112,7 @@
     #  * foreground: use the same color as the foreground;
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
-    separator_color = frame
+    separator_color = auto
 
     # Sort messages by urgency.
     sort = yes
@@ -123,7 +126,7 @@
 
     ### Text ###
 
-    font = RobotoMono Nerd Font 16
+    font = sans-serif 14
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -183,7 +186,7 @@
     ellipsize = middle
 
     # Ignore newlines '\n' in notifications.
-    ignore_newline = no
+    ignore_newline = true
 
     # Stack together notifications with the same content
     stack_duplicates = true
@@ -201,7 +204,7 @@
     enable_recursive_icon_lookup = true
 
     # Set icon theme (only used for recursive icon lookup)
-    icon_theme = "WhiteSur-dark,Tokyonight-Moon,Dracula,Adwaita"
+    icon_theme = "Colloid-Catppuccin-Dark,Dracula,Adwaita"
     # You can also set multiple icon themes, with the leftmost one being used first.
     # icon_theme = "Adwaita, breeze"
 
@@ -211,13 +214,13 @@
     # Scale small icons up to this size, set to 0 to disable. Helpful
     # for e.g. small files or high-dpi screens. In case of conflict,
     # max_icon_size takes precedence over this.
-    min_icon_size = 16
+    min_icon_size = 32
 
     # Scale larger icons down to this size, set to 0 to disable
     max_icon_size = 64
 
     # Paths to default icons (only neccesary when not using recursive icon lookup)
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    # icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
     ### History ###
 
@@ -231,7 +234,7 @@
     ### Misc/Advanced ###
 
     # dmenu path.
-    dmenu = /usr/bin/wofi --show dmenu:
+    dmenu = /usr/bin/rofi -dmenu -window-title Dunst:
 
     # Browser for opening urls in context menu.
     browser = /usr/bin/xdg-open
@@ -250,13 +253,13 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 20
+    corner_radius = 10
 
     # Ignore the dbus closeNotification message.
     # Useful to enforce the timeout set by dunst configuration. Without this
     # parameter, an application may close the notification sent before the
     # user defined timeout.
-    ignore_dbusclose = false
+    ignore_dbusclose = true
 
     ### Wayland ###
     # These settings are Wayland-specific. They have no effect when using X11
@@ -296,7 +299,7 @@
     # These values can be strung together for each mouse event, and
     # will be executed in sequence.
     mouse_left_click = close_current
-    mouse_middle_click = context_all
+    mouse_middle_click = context
     mouse_right_click = do_action, close_current
 
 # Experimental features that may or may not work correctly. Do not expect them
@@ -313,26 +316,34 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#24273a"
+    background = "#5b6078"
     foreground = "#cad3f5"
     timeout = 10
     # Icon for notifications with low urgency, uncomment to enable
     default_icon = ~/.config/dunst/icons/notification-low.png
 
 [urgency_normal]
-    background = "#24273a"
+    background = "#363a4f"
     foreground = "#cad3f5"
     timeout = 10
     # Icon for notifications with normal urgency, uncomment to enable
     default_icon = ~/.config/dunst/icons/notification-nomal.png
 
 [urgency_critical]
-    background = "#24273a"
-    foreground = "#cad3f5"
+    background = "#ed8796"
+    foreground = "#363a4f"
     frame_color = "#ed8796"
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
     default_icon = ~/.config/dunst/icons/notification-alert.png
+
+
+[fullscreen_delay_everything]
+    fullscreen = delay
+
+[fullscreen_show_critical]
+    msg_urgency = critical
+    fullscreen = show
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
