@@ -1,4 +1,5 @@
 # hypr-rice
+
 :fire: Rice of Hyprland 🍚
 
 - OS: Arch Linux
@@ -6,12 +7,13 @@
 - Bar: Waybar
 - Applications launcher: Rofi (rofi-wayland)
 - Terminal: Wezterm, Alacritty
-- Shell: Zsh
-- CLI/TUI applications: fastfetch, neovim, bottom, cava, cmatrix
+- Shell: Zsh + starship
+- Editor: Neovim, Helix, Zed
+- CLI/TUI applications: fastfetch, bottom, btop, cava, cmatrix
 - Fonts: CaskaydiaCove Nerd Font Mono, SFMono Nerd Font Mono, HarmonyOS Sans SC
 - Music: mpd + ncmpcpp
 - GTK Theme: Catppuccin-Dark-Macchiato
-- QT Theme: catppuccin-macchiato-mauve
+- QT Theme: Colloid-Catppuccin-Dark
 - Icon Theme: Colloid-Catppuccin-Dark
 - Cursor Theme: Bibata-Modern-Ice
 
